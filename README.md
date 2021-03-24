@@ -1,12 +1,12 @@
 # MSSQL Connection Helper
 
-![npm](https://img.shields.io/npm/v/mssql-conn?color=blue&label=vers%C3%A3o)
+[![npm](https://img.shields.io/npm/v/mssql-conn?color=blue&label=vers%C3%A3o)](https://img.shields.io/npm/dt/mssql-conn)](https://www.npmjs.com/package/mssql-conn)
 ![GitHub all releases](https://img.shields.io/github/downloads/brunnexo/mssql-conn/total)
-![npm](https://img.shields.io/npm/dt/mssql-conn)
+[![npm](https://img.shields.io/npm/dt/mssql-conn)](https://www.npmjs.com/package/mssql-conn)
 
 Módulo Node.js para facilitar a comunicação com o Microsoft SQL Server
 
-## Instalação
+## Instalação e requisitos
 
 Necessário [Node.js](https://nodejs.org/en/) para instalar e [Microsoft SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads) para executar
 

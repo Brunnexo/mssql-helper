@@ -1,26 +1,29 @@
 {
   "name": "mssql-conn",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Microsoft SQL Connection Helper",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "bin": "lib/cli.js",
+  "bin": {
+    "mssqlt": "lib/cli.js"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Brunnexo/mssql-helper.git"
+    "url": "git+https://github.com/Brunnexo/mssql-conn.git"
   },
   "keywords": [
     "mssql",
     "tedious",
     "sql",
-    "connection"
+    "connection",
+    "database"
   ],
   "author": "Bruno Costa",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Brunnexo/mssql-helper/issues"
+    "url": "https://github.com/Brunnexo/mssql-conn/issues"
   },
-  "homepage": "https://github.com/Brunnexo/mssql-helper#readme",
+  "homepage": "https://github.com/Brunnexo/mssql-conn#readme",
   "dependencies": {
     "@types/tedious": "^4.0.3",
     "mssql": "^6.3.1"

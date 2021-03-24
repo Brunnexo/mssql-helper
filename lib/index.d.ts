@@ -32,4 +32,3 @@ declare class MSSQL {
     execute(query: string, row?: Function): Promise<void>;
 }
 export default MSSQL;
-//# sourceMappingURL=index.d.ts.map

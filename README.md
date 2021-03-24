@@ -1,2 +1,103 @@
-# mssql-helper
-Módulo NodeJS para facilitar a comunicação com o Microsoft SQL Server
+# MSSQL Connection Helper
+
+Módulo Node.js para facilitar a comunicação com o Microsoft SQL Server
+
+## Instalação
+
+Necessário [Node.js](https://nodejs.org/en/) para instalar e [Microsoft SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads) para executar
+
+```bash
+npm install mssql-conn
+```
+
+## Exemplo de uso
+
+```JavaScript
+const MSSQL = require('mssql-conn')
+
+let test = new MSSQL({
+    "server": "127.0.0.1", //Ou localhost ou o IP do servidor
+    "authentication": {
+        "type": "default",
+        "options": {
+            "userName": "sa", //Usuário para logon
+            "password": "sa" //Senha - não é seguro expor a senha como texto, use criptografia!
+        }
+    },
+    "options": {
+        "encrypt": false,
+        "database": "db", //Nome do banco de dados
+        "enableArithAbort": true,
+        "appName": "default", //Nome da aplicação que vai conectar ao banco (SQL Server Profiler)
+        "useColumnNames": true //O retorno das tabelas serão <objeto>.<nome da coluna>.value
+    }
+};
+
+//Conecta ao banco de dados
+//Este comando serve para fins de teste, ao usar select ou execute
+
+test.connect()
+    .then(e => {
+        //Conectado, uhull!
+    })
+    .catch(err => {
+        //Deu erro
+        console.log(err); //Mensagem de erro
+    });
+
+//Seleciona valores
+let results = [];
+
+test.select('SELECT * FROM TABELA', row => {  //Para cada linha encontrada, realizará um callback
+    results.push(row);
+}).then(() => {
+    //Terminou o processo
+}).cacth(err => {
+    //Deu erro
+    console.log(err); //Mensagem de erro
+});
+
+//Executa outros comandos, ou insere valores
+test.execute("INSERT INTO TABELA ([Coluna 1], [Coluna 2]) VALUES ('OLÁ', 'MUNDO!')")
+.then(() => {
+    //Deu certo!
+}).catch(err => {
+    //Deu erro
+    console.log(err);
+});
+
+```
+# QueryBuilder
+O QueryBuilder é um auxiliar que simplifica as execuções de comandos SQL, permitindo usar arquivos .SQL ao invés de longos textos.
+
+O QueryBuilder vai buscar arquivos SQL no caminho:
+```JavaScript
+__dirname/SQL/<arquivo>.sql
+```
+## Exemplo de uso
+```JavaScript
+//Sem QueryBuilder
+test.select('SELECT * FROM TABELA_FINANCEIRA WHERE [COLUNA] = 100');
+
+//Com QueryBuilder
+//QueryBuilder('<arquivo>', ...arg);
+test.select(MSSQL.QueryBuilder('Financeira', '100')) //
+```
+
+Dentro do arquivo **Financeira.sql**, você encontraria isso:
+```SQL
+SELECT * FROM TABELA_FINANCEIRA WHERE [COLUNA] = @VAR0
+```
+As variáveis seguem o padrão **@VAR** + o índice do argumento, iniciando em 0.
+
+É possível alterar o nome da variável com o comando:
+```JavaScript
+test.setVariable('FOO');
+```
+Agora, o QueryBuilder vai buscar nos arquivos variáveis com o padrão **@FOO** + o índice do argumento.
+
+## Contribuições
+Toda ajuda é bem-vinda!
+
+## Licença
+[MIT](https://choosealicense.com/licenses/mit/)

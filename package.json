@@ -1,6 +1,6 @@
 {
   "name": "mssql-conn",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Microsoft SQL Connection Helper",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

@@ -16,7 +16,7 @@ npm install mssql-conn
 ## Exemplo de uso
 
 ```javascript
-const MSSQL = require('mssql-conn')
+const { MSSQL } = require('mssql-conn')
 
 let test = new MSSQL({
     "server": "127.0.0.1", //Ou localhost ou o IP do servidor

@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import { Connection, Request } from 'tedious';
 
-
 interface SQLConfig {
     server: string,
     authentication: {
@@ -25,7 +24,7 @@ interface SQLAttr {
     Connection?: Connection
 }
 
-class MSSQL {
+export class MSSQL {
     protected Config: SQLConfig
 
     protected Attr?: SQLAttr;
@@ -80,7 +79,7 @@ class MSSQL {
         return new Promise((resolve, reject) => {
             if(this.Attr?.Connected === false) {
                 this.Attr.Connection = new Connection(this.Config);
-                this.Attr.Connection.on('connect', (err: any) => {
+                this.Attr.Connection.on('connect', (err: Error) => {
                     if (err) reject(err.message);
                     else {
                         this.Attr!.Connected! = true;
@@ -95,9 +94,7 @@ class MSSQL {
         await this.connect();
         return new Promise((resolve, reject) => {
             this.Attr!.Connection!.execSql(
-                new Request(query, (err) => {
-                    if (err) {reject(err.message)};
-                })
+                new Request(query, (err: Error) => { if (err) {reject(err.message)} })
                     .on('row', (data) => {row(data)})
                     .on('requestCompleted', () => {resolve(true)})
                     .on('error', (err) => {reject(err)})
@@ -105,19 +102,15 @@ class MSSQL {
         });
     }
 
-    async execute(query: string, row?: Function) {
+    async execute(query: string, returnValue?: Function) {
         await this.connect();
         return new Promise<void>((resolve, reject) => {
             this.Attr!.Connection!.execSql(
-                new Request(query, (err) => {
-                    if (err) reject(err.message);
-                })
-                .on('row', (data) => {if ( typeof(row) === 'function') row(data) })
+                new Request(query, (err: Error) => { if (err) reject(err.message) })
+                .on('returnValue', (data) => {if ( typeof(returnValue) === 'function') returnValue(data) })
                 .on('requestCompleted', () => { resolve() })
-                .on('error', (err) => { reject(err.message) })
+                .on('error', (err: Error) => { reject(err.message) })
             )
         });
     }
 }
-
-export default MSSQL;

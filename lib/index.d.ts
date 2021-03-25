@@ -20,7 +20,7 @@ interface SQLAttr {
     Connected: boolean;
     Connection?: Connection;
 }
-declare class MSSQL {
+export declare class MSSQL {
     protected Config: SQLConfig;
     protected Attr?: SQLAttr;
     private static SQL_VARIABLE;
@@ -29,6 +29,6 @@ declare class MSSQL {
     static QueryBuilder(sql: string, ...args: any[]): string;
     connect(): Promise<unknown>;
     select(query: string, row: Function): Promise<unknown>;
-    execute(query: string, row?: Function): Promise<void>;
+    execute(query: string, returnValue?: Function): Promise<void>;
 }
-export default MSSQL;
+export {};

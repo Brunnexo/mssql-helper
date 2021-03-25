@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import MSSQL from './index';
+import { MSSQL } from './index';
+
 const ARGS: string[] = process.argv.slice(2);
 function testConnection(props: { server: string; userName: string; password: string; database: string; }) {
     console.log(`\x1b[34m%s\x1b[0m`, `Testing SQL connection...\nServer: ${props.server}\nDatabase: ${props.database}\nUsername: ${props.userName}\nPassword: ${props.password}`);
@@ -25,7 +26,7 @@ function testConnection(props: { server: string; userName: string; password: str
             console.log(`\x1b[32m%s\x1b[0m`, 'Connected successfully!');
             process.exit(1);
         })
-        .catch((err) => {
+        .catch((err: string) => {
             console.log(`\x1b[31m%s\x1b[0m`, `Connection fail!\n[${err}]`);
             process.exit(0);
         });

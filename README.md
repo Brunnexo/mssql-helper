@@ -1,7 +1,7 @@
 # MSSQL Connection Helper
 
-![npm](https://img.shields.io/npm/v/mssql-conn?color=blue&label=vers%C3%A3o)
-![npm](https://img.shields.io/npm/dt/mssql-conn)
+<a href="https://www.npmjs.com/package/mssql-conn">![npm](https://img.shields.io/npm/v/mssql-conn?color=blue&label=vers%C3%A3o)</a>
+<a href="https://www.npmjs.com/package/mssql-conn">![npm](https://img.shields.io/npm/dt/mssql-conn)</a>
 
 Módulo Node.js para facilitar a comunicação com o Microsoft SQL Server
 
